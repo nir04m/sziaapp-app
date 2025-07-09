@@ -1,15 +1,10 @@
 import express from 'express';
+import { signup, login, logout } from '../controllers/auth.controller.js'; // Adjust the path as necessary
 
 const router = express.Router();
 
-router.get('/signup', (req, res) => {
-  res.send('Hello, SziaApp Backend! Signup!');
-});
-router.get('/login', (req, res) => {
-  res.send('Hello, SziaApp Backend! Login!');
-}); 
-router.get('/logout', (req, res) => {
-    res.send('Hello, SziaApp Backend! Logout!');
-});
+router.post('/signup', signup);
+router.post('/login', login);
+router.post('/logout', logout);
 
 export default router;
