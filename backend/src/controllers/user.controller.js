@@ -90,7 +90,7 @@ export async function acceptFriendRequest(req, res) {
         }
 
         //Verify the current user is the recipient
-        if(!friendRequest.recipient.toString() !== req.user.id) {
+        if(friendRequest.recipient.toString() !== req.user.id) {
             return res.status(403).json({message: "You are not authorized to accept this request"});
         }
 
@@ -106,6 +106,8 @@ export async function acceptFriendRequest(req, res) {
         await User.findByIdAndUpdate(friendRequest.recipient, {
             $addToSet: { friends: friendRequest.sender}
         });
+
+        return res.status(200).json({ success: true });
 
     } catch (error) {
         console.error("Error in acceptFriendRequest controller", error.message);
